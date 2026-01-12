@@ -8,32 +8,7 @@ import {
 import LeaderboardTabs from "./components/LeaderboardTabs";
 import BarCharts from "./components/BarCharts";
 import Sidebar from "./components/Sidebar";
-
-function StatCard({
-  label,
-  value,
-  subtitle,
-  type,
-}: {
-  label: string;
-  value: string | number;
-  subtitle?: string;
-  type?: "goals" | "assists" | "default";
-}) {
-  return (
-    <div className={`stat-card p-6 ${type || ""}`}>
-      <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2">
-        {label}
-      </p>
-      <p className="text-4xl font-bold text-[var(--foreground)] glow-text">
-        {value}
-      </p>
-      {subtitle && (
-        <p className="text-sm text-[var(--accent)] mt-2 font-medium">{subtitle}</p>
-      )}
-    </div>
-  );
-}
+import StatCard from "./components/StatCard";
 
 export default async function Home({
   searchParams,
