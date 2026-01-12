@@ -1,5 +1,6 @@
 import { getTopScorers, getTopAssistProviders, getSeasonTotals } from "@/lib/db";
 import LeaderboardTabs from "./components/LeaderboardTabs";
+import BarCharts from "./components/BarCharts";
 
 function StatCard({
   label,
@@ -35,7 +36,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen p-6 md:p-10">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="mb-10">
           <div className="flex items-center gap-3 mb-2">
@@ -50,7 +51,7 @@ export default async function Home() {
         </header>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 gap-4 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           <StatCard label="Total Goals" value={totals.totalGoals} />
           <StatCard label="Total Assists" value={totals.totalAssists} />
           <StatCard
@@ -65,11 +66,21 @@ export default async function Home() {
           />
         </div>
 
-        {/* Tabbed Leaderboard */}
-        <LeaderboardTabs
-          goalScorers={goalScorers}
-          assistProviders={assistProviders}
-        />
+        {/* Bar Charts */}
+        <div className="mb-10">
+          <BarCharts
+            goalScorers={goalScorers}
+            assistProviders={assistProviders}
+          />
+        </div>
+
+        {/* Leaderboard with Dropdowns */}
+        <div className="max-w-2xl mx-auto">
+          <LeaderboardTabs
+            goalScorers={goalScorers}
+            assistProviders={assistProviders}
+          />
+        </div>
 
         {/* Footer */}
         <footer className="mt-12 text-center text-sm text-[var(--muted)]">

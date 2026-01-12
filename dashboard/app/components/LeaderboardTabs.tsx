@@ -75,53 +75,54 @@ export default function LeaderboardTabs({
   goalScorers: PlayerStat[];
   assistProviders: PlayerStat[];
 }) {
-  const [activeTab, setActiveTab] = useState<"goals" | "assists">("goals");
+  const [statType, setStatType] = useState<"goals" | "assists">("goals");
+  const [limit, setLimit] = useState<number>(10);
 
-  const data = activeTab === "goals" ? goalScorers : assistProviders;
-  const top10 = data.slice(0, 10);
+  const data = statType === "goals" ? goalScorers : assistProviders;
+  const limitedData = data.slice(0, limit);
   const maxValue =
-    activeTab === "goals" ? top10[0]?.goals || 1 : top10[0]?.assists || 1;
+    statType === "goals"
+      ? limitedData[0]?.goals || 1
+      : limitedData[0]?.assists || 1;
 
   return (
     <div className="card overflow-hidden">
-      {/* Tab Buttons */}
-      <div className="flex border-b border-[var(--card-border)]">
-        <button
-          onClick={() => setActiveTab("goals")}
-          className={`flex-1 px-6 py-4 text-sm font-semibold transition-all relative ${
-            activeTab === "goals"
-              ? "text-[var(--accent)]"
-              : "text-[var(--muted)] hover:text-[var(--foreground)]"
-          }`}
-        >
-          Top Scorers
-          {activeTab === "goals" && (
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent)]" />
-          )}
-        </button>
-        <button
-          onClick={() => setActiveTab("assists")}
-          className={`flex-1 px-6 py-4 text-sm font-semibold transition-all relative ${
-            activeTab === "assists"
-              ? "text-[var(--success)]"
-              : "text-[var(--muted)] hover:text-[var(--foreground)]"
-          }`}
-        >
-          Top Assists
-          {activeTab === "assists" && (
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--success)]" />
-          )}
-        </button>
+      {/* Dropdown Controls */}
+      <div className="flex items-center gap-4 px-6 py-4 border-b border-[var(--card-border)]">
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-[var(--muted)]">Stat:</label>
+          <select
+            value={statType}
+            onChange={(e) => setStatType(e.target.value as "goals" | "assists")}
+            className="dropdown"
+          >
+            <option value="goals">Goals</option>
+            <option value="assists">Assists</option>
+          </select>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-[var(--muted)]">Show:</label>
+          <select
+            value={limit}
+            onChange={(e) => setLimit(Number(e.target.value))}
+            className="dropdown"
+          >
+            <option value={10}>Top 10</option>
+            <option value={15}>Top 15</option>
+            <option value={20}>Top 20</option>
+          </select>
+        </div>
       </div>
 
       {/* Leaderboard Content */}
       <div className="p-2">
-        {top10.map((stat, index) => (
+        {limitedData.map((stat, index) => (
           <PlayerRow
             key={stat.player_id}
             stat={stat}
             position={index + 1}
-            type={activeTab}
+            type={statType}
             maxValue={maxValue}
           />
         ))}
