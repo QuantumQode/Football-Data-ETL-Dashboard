@@ -74,3 +74,6 @@ next-env.d.ts
 .DS_Store
 Thumbs.db
 
+# Raw data
+etl/raw/**
+
