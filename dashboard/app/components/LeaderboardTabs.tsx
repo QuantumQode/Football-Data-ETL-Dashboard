@@ -23,6 +23,7 @@ function PlayerRow({
 }) {
   const value = type === "goals" ? stat.goals : stat.assists;
   const barWidth = (value / maxValue) * 100;
+  const color = type === "goals" ? "#f97316" : "#22d3ee";
 
   const getRankClass = (pos: number) => {
     if (pos === 1) return "rank-1";
@@ -41,20 +42,16 @@ function PlayerRow({
   };
 
   return (
-    <div className="flex items-center gap-3 py-3 px-4 hover:bg-[var(--background)] transition-colors rounded-lg">
+    <div className="flex items-center gap-3 py-3 px-4 hover:bg-[rgba(255,255,255,0.03)] transition-all rounded-xl group">
       <div className={`rank-badge ${getRankClass(position)}`}>{position}</div>
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-[var(--foreground)] truncate">
+        <p className="font-semibold text-[var(--foreground)] truncate group-hover:text-[var(--accent)] transition-colors">
           {getDisplayName(stat.name)}
         </p>
         <p className="text-xs text-[var(--muted)] truncate">{stat.team_name}</p>
       </div>
-      <div className="w-20 flex flex-col items-end gap-1.5">
-        <span
-          className={`text-base font-bold ${
-            type === "goals" ? "text-[var(--accent)]" : "text-[var(--success)]"
-          }`}
-        >
+      <div className="w-24 flex flex-col items-end gap-2">
+        <span className="text-base font-bold tabular-nums" style={{ color }}>
           {value}
         </span>
         <div className="stat-bar w-full">
@@ -87,22 +84,26 @@ export default function LeaderboardTabs({
 
   return (
     <div className="card overflow-hidden">
-      {/* Dropdown Controls */}
-      <div className="flex items-center gap-4 px-6 py-4 border-b border-[var(--card-border)]">
-        <div className="flex items-center gap-2">
-          <label className="text-sm text-[var(--muted)]">Stat:</label>
+      {/* Controls Header */}
+      <div className="flex flex-wrap items-center gap-4 px-6 py-5 border-b border-[var(--card-border)] bg-[rgba(255,255,255,0.02)]">
+        <div className="flex items-center gap-3">
+          <label className="text-sm font-medium text-[var(--muted)]">
+            Stat Type
+          </label>
           <select
             value={statType}
             onChange={(e) => setStatType(e.target.value as "goals" | "assists")}
             className="dropdown"
           >
-            <option value="goals">Goals</option>
-            <option value="assists">Assists</option>
+            <option value="goals">⚽ Goals</option>
+            <option value="assists">🎯 Assists</option>
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
-          <label className="text-sm text-[var(--muted)]">Show:</label>
+        <div className="flex items-center gap-3">
+          <label className="text-sm font-medium text-[var(--muted)]">
+            Show
+          </label>
           <select
             value={limit}
             onChange={(e) => setLimit(Number(e.target.value))}
@@ -113,10 +114,14 @@ export default function LeaderboardTabs({
             <option value={20}>Top 20</option>
           </select>
         </div>
+
+        <div className="ml-auto text-xs text-[var(--muted)]">
+          {limitedData.length} players
+        </div>
       </div>
 
       {/* Leaderboard Content */}
-      <div className="p-2">
+      <div className="p-3">
         {limitedData.map((stat, index) => (
           <PlayerRow
             key={stat.player_id}
