@@ -1,0 +1,86 @@
+{
+  "data": [
+    {
+      "id": 9636,
+      "season_id": 14,
+      "player_id": 672,
+      "type_id": 209,
+      "position": 1,
+      "total": 1,
+      "participant_id": 8,
+      "type": {
+        "id": 209,
+        "name": "Assist Topscorer",
+        "code": "assist-topscorer",
+        "developer_name": "ASSIST_TOPSCORER",
+        "model_type": "statistic",
+        "stat_group": null
+      },
+      "player": {
+        "id": 672,
+        "sport_id": 1,
+        "country_id": 5,
+        "nationality_id": 5,
+        "city_id": 24304,
+        "position_id": 26,
+        "detailed_position_id": 149,
+        "type_id": 26,
+        "common_name": "L. Pezzini Leiva",
+        "firstname": "Lucas",
+        "lastname": "Pezzini Leiva",
+        "name": "Lucas Pezzini Leiva",
+        "display_name": "Lucas Leiva",
+        "image_path": "https://cdn.sportmonks.com/images/soccer/players/0/672.png",
+        "height": 179,
+        "weight": 74,
+        "date_of_birth": "1987-01-09",
+        "gender": "male"
+      },
+      "participant": {
+        "id": 8,
+        "sport_id": 1,
+        "country_id": 462,
+        "venue_id": 230,
+        "gender": "male",
+        "name": "Liverpool",
+        "short_code": "LIV",
+        "image_path": "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+        "founded": 1892,
+        "type": "domestic",
+        "placeholder": false,
+        "last_played_at": "2026-01-08 20:00:00"
+      }
+    }
+  ],
+  "pagination": {
+    "count": 1,
+    "per_page": 25,
+    "current_page": 1,
+    "next_page": null,
+    "has_more": false
+  },
+  "subscription": [
+    {
+      "meta": {
+        "trial_ends_at": "2026-01-23 12:18:51",
+        "ends_at": "2026-02-09 11:19:25",
+        "current_timestamp": 1768222365
+      },
+      "plans": [
+        {
+          "plan": "European Plan",
+          "sport": "Football",
+          "category": "Advanced"
+        }
+      ],
+      "add_ons": [],
+      "widgets": []
+    }
+  ],
+  "rate_limit": {
+    "resets_in_seconds": 1248,
+    "remaining": 2964,
+    "requested_entity": "Topscorer"
+  },
+  "timezone": "UTC"
+}
