@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Rajdhani } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import HeaderWrapper from "./components/HeaderWrapper";
 
 const rajdhani = Rajdhani({
   variable: "--font-rajdhani",
@@ -9,8 +11,8 @@ const rajdhani = Rajdhani({
 });
 
 export const metadata: Metadata = {
-  title: "Premier League Dashboard | 2025/26",
-  description: "Football statistics dashboard for Premier League 2025/26 season",
+  title: "MatchMetric | Football Statistics Dashboard",
+  description: "Real-time football statistics, player analytics, and match insights",
 };
 
 export default function RootLayout({
@@ -21,7 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${rajdhani.variable} antialiased`}>
-        {children}
+        <Suspense fallback={<div className="h-16" />}>
+          <HeaderWrapper />
+        </Suspense>
+        <div className="pt-16">
+          {children}
+        </div>
       </body>
     </html>
   );
